@@ -59,8 +59,9 @@
     transmission_hw_interface="hardware_interface/PositionJointInterface"
     safety_limits="false" safety_pos_margin="0.15"
     safety_k_position="20"
-    kinematics_file="${load_yaml('$(find dual_arm_scene_description)/config/a_bot_calibration.yaml')}"
   />
+
+
 
   <xacro:ur5e_robot prefix="b_bot_" joint_limited="true"
     shoulder_pan_lower_limit="${-pi}" shoulder_pan_upper_limit="${pi}"
@@ -72,7 +73,6 @@
     transmission_hw_interface="hardware_interface/PositionJointInterface"
     safety_limits="false" safety_pos_margin="0.15"
     safety_k_position="20"
-    kinematics_file="${load_yaml('$(find dual_arm_scene_description)/config/b_bot_calibration.yaml')}"
   />
 
   <link name="dual_arm_ground" />

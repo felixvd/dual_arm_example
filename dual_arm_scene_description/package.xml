@@ -50,6 +50,7 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <buildtool_depend>rospy</buildtool_depend>
+  <exec_depend>ur_description</exec_depend>
   <!-- <depend>realsense2_camera</depend> -->
 
   <!-- The export tag contains other, unspecified, tags -->
