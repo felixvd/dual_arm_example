@@ -62,6 +62,32 @@ moveit_msgs::CollisionObject makeCollisionObject()
   return screw_tool_m4;
 }
 
+bool spawnTool(std::string screw_tool_id, moveit::planning_interface::PlanningSceneInterface& planning_scene_interface)
+{
+  std::vector<moveit_msgs::CollisionObject> collision_objects;
+  collision_objects.resize(1);
+
+  collision_objects[0] = screw_tool_m4;
+  collision_objects[0].operation = collision_objects[0].ADD;
+
+  planning_scene_interface.applyCollisionObjects(collision_objects);
+
+  return true;
+}
+
+// Remove the tool from the scene so it does not cause unnecessary collision calculations
+bool despawnTool(std::string screw_tool_id, moveit::planning_interface::PlanningSceneInterface& planning_scene_interface)
+{
+    std::vector<moveit_msgs::CollisionObject> collision_objects;
+    collision_objects.resize(1);
+
+    collision_objects[0].id = screw_tool_id;
+    collision_objects[0].operation = collision_objects[0].REMOVE;
+    planning_scene_interface.applyCollisionObjects(collision_objects);
+
+    return true;
+}
+
 bool attachDetachTool(std::string screw_tool_id, std::string robot_name, std::string attach_or_detach, moveit::planning_interface::PlanningSceneInterface& planning_scene_interface)
 {
   moveit_msgs::AttachedCollisionObject att_coll_object;
@@ -84,6 +110,8 @@ bool equipUnequipTool(std::string robot_name, std::string screw_tool_id, std::st
 {
   bool equip = (equip_or_unequip == "equip");
   bool unequip = (equip_or_unequip == "unequip");
+
+  // spawnTool("screw_tool_m4", psi);
 
   group.clearPoseTargets();
   group.setStartStateToCurrentState();
@@ -122,6 +150,8 @@ bool equipUnequipTool(std::string robot_name, std::string screw_tool_id, std::st
   group.setNamedTarget("home");
   group.move();
   
+  // despawnTool("screw_tool_m4", psi);
+
   return true;
 }
 
