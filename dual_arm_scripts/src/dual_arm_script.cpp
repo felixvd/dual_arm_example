@@ -67,7 +67,7 @@ bool spawnTool(std::string screw_tool_id, moveit::planning_interface::PlanningSc
   std::vector<moveit_msgs::CollisionObject> collision_objects;
   collision_objects.resize(1);
 
-  collision_objects[0] = screw_tool_m4;
+  collision_objects[0] = makeCollisionObject();
   collision_objects[0].operation = collision_objects[0].ADD;
 
   planning_scene_interface.applyCollisionObjects(collision_objects);
