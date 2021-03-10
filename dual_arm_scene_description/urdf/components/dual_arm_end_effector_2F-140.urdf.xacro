@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<!-- This file is a safety measure because a_bot is temporarily using a 2F-140 gripper 
+     instead of a 2F-85 gripper. The tip link is set to the . -->
+
+<robot name="robotiq_85_gripper_test" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="dual_arm_end_effector" params="prefix use_soft_wrist:=false parent">
+    <xacro:include filename="$(find robotiq_description)/urdf/robotiq_140_gripper.urdf.xacro"/>
+    
+    <xacro:robotiq_140_gripper prefix="${prefix}" parent="${parent}">
+        <origin rpy="0.0 0.0 0.0" xyz="0 0 0"/>
+    </xacro:robotiq_140_gripper>
+
+
+    <!-- Add an additional link to plan with. Oriented like the UR ee_link frame. -->
+    <joint name="${prefix}robotiq_85_tip_link_joint" type="fixed">
+      <parent link="${prefix}robotiq_140_base_link"/>
+      <child link="${prefix}robotiq_85_tip_link"/>
+      <origin rpy="0.0 0.0 0.0" xyz="${.163+.083} 0.0 0.0"/>
+    </joint>
+    <link name="${prefix}robotiq_85_tip_link"/>
+  </xacro:macro>
+</robot>
