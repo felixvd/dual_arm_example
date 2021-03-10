@@ -91,10 +91,10 @@
 
   <!-- Spawn and attach robotiq grippers -->
   <xacro:include filename="$(find dual_arm_scene_description)/urdf/components/dual_arm_end_effector_2F-140.urdf.xacro" />
-  <xacro:dual_arm_end_effector prefix="a_bot_" use_soft_wrist="false" parent = "a_bot_ee_link" />
+  <xacro:dual_arm_end_effector prefix="a_bot_" parent = "a_bot_ee_link" />
 
   <xacro:include filename="$(find dual_arm_scene_description)/urdf/components/dual_arm_end_effector.urdf.xacro" />
-  <xacro:dual_arm_end_effector prefix="b_bot_" use_soft_wrist="false" parent = "b_bot_ee_link" />
+  <xacro:dual_arm_end_effector prefix="b_bot_" parent = "b_bot_ee_link" />
 
   <!-- The "world" link definition should be removed, but apparently it is necessary for Gazebo -->
   <link name="world" />

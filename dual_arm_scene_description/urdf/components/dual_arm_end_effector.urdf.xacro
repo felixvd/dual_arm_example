@@ -5,12 +5,12 @@
 
 <robot name="robotiq_85_gripper_test" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="dual_arm_end_effector" params="prefix use_soft_wrist:=false parent">
-    <xacro:include filename="$(find robotiq_description)/urdf/robotiq_85_gripper.urdf.xacro"/>
+  <xacro:macro name="dual_arm_end_effector" params="prefix parent">
+    <!-- <xacro:include filename="$(find robotiq_description)/urdf/robotiq_85_gripper.urdf.xacro"/> -->
     
-    <xacro:robotiq_85_gripper prefix="${prefix}" parent="${parent}">
-        <origin rpy="0.0 0.0 0.0" xyz="0.01 0 0"/> <!-- This 0.01 offset is the Robotiq/UR coupling -->
-    </xacro:robotiq_85_gripper>
+    <!-- <xacro:robotiq_85_gripper prefix="${prefix}" parent="${parent}">
+        <origin rpy="0.0 0.0 0.0" xyz="0.01 0 0"/>
+    </xacro:robotiq_85_gripper> -->
 
     <link name="${prefix}_coupling">
       <visual>
@@ -37,7 +37,7 @@
 
     <!-- Add an additional link to plan with. Oriented like the UR ee_link frame. -->
     <joint name="${prefix}robotiq_85_tip_link_joint" type="fixed">
-      <parent link="${prefix}robotiq_85_base_link"/>
+      <parent link="${parent}"/>
       <child link="${prefix}robotiq_85_tip_link"/>
       <origin rpy="0 0 0" xyz=".163 0 0"/>
     </joint>
